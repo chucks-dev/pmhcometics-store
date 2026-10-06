@@ -8,7 +8,7 @@ export const pool: Pool =
   new Pool({
     connectionString: env.databaseUrl,
     max: 10,
-    ssl: env.isProd ? { rejectUnauthorized: true } : undefined,
+    ssl: env.isProd ? { rejectUnauthorized: false } : undefined,
   });
 if (!env.isProd) g.__pgPool = pool; // survive hot reloads in dev
 
