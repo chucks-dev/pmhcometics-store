@@ -25,7 +25,7 @@ export default function AdminLogin() {
             <p className="text-center text-sm text-muted">Forgot your password? Ask a Super Admin to reset your account.</p>
           </form>
         ) : (
-          <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); run(async () => { await api("/api/admin/auth/verify-2fa", { body: { code } }); window.location.href = "/"; }); }}>
+          <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); run(async () => { await api("/api/admin/auth/verify-2fa", { body: { code } }); window.location.href = "/admin"; }); }}>
             <h1 className="text-2xl">Two-factor code</h1>
             <p className="text-muted">Enter the 6-digit code from your authenticator app.</p>
             <Input label="Code" inputMode="numeric" autoComplete="one-time-code" maxLength={6} required autoFocus value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} />
@@ -39,3 +39,4 @@ export default function AdminLogin() {
     </div>
   );
 }
+

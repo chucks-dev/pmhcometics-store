@@ -11,5 +11,6 @@ export async function guardPage(permission?: Permission) {
   } catch (e) {
     failure = e instanceof HttpError && e.status === 403 ? "forbidden" : "login";
   }
-  redirect(failure === "forbidden" ? "/" : "/login");
+  redirect(failure === "forbidden" ? "/admin" : "/admin/login");
 }
+
