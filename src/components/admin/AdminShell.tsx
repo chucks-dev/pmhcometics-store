@@ -6,30 +6,30 @@ import { useState } from "react";
 import { api, cn } from "@/lib/api";
 
 const NAV: { group: string; items: { href: string; label: string; Icon: any; perm: string }[] }[] = [
-  { group: "", items: [{ href: "/", label: "Dashboard", Icon: LayoutDashboard, perm: "dashboard:view" }] },
+  { group: "", items: [{ href: "/admin", label: "Dashboard", Icon: LayoutDashboard, perm: "dashboard:view" }] },
   { group: "Catalogue", items: [
-    { href: "/products", label: "Products", Icon: Package, perm: "products:read" },
-    { href: "/categories", label: "Categories", Icon: Tags, perm: "products:read" },
-    { href: "/inventory", label: "Inventory", Icon: Warehouse, perm: "inventory:write" }] },
+    { href: "/admin/products", label: "Products", Icon: Package, perm: "products:read" },
+    { href: "/admin/categories", label: "Categories", Icon: Tags, perm: "products:read" },
+    { href: "/admin/inventory", label: "Inventory", Icon: Warehouse, perm: "inventory:write" }] },
   { group: "Sales", items: [
-    { href: "/orders", label: "Orders", Icon: ShoppingBag, perm: "orders:read" },
-    { href: "/customers", label: "Customers", Icon: Users, perm: "customers:read" },
-    { href: "/payments", label: "Payments", Icon: CreditCard, perm: "payments:read" }] },
+    { href: "/admin/orders", label: "Orders", Icon: ShoppingBag, perm: "orders:read" },
+    { href: "/admin/customers", label: "Customers", Icon: Users, perm: "customers:read" },
+    { href: "/admin/payments", label: "Payments", Icon: CreditCard, perm: "payments:read" }] },
   { group: "Marketing", items: [
-    { href: "/discounts", label: "Discounts", Icon: Percent, perm: "discounts:write" },
-    { href: "/reviews", label: "Reviews", Icon: Star, perm: "reviews:moderate" }] },
+    { href: "/admin/discounts", label: "Discounts", Icon: Percent, perm: "discounts:write" },
+    { href: "/admin/reviews", label: "Reviews", Icon: Star, perm: "reviews:moderate" }] },
   { group: "Site", items: [
-    { href: "/content", label: "Homepage Content", Icon: FileText, perm: "content:write" },
-    { href: "/notifications", label: "Notifications", Icon: Bell, perm: "dashboard:view" }] },
-  { group: "Insights", items: [{ href: "/reports", label: "Reports", Icon: BarChart3, perm: "reports:view" }] },
+    { href: "/admin/content", label: "Homepage Content", Icon: FileText, perm: "content:write" },
+    { href: "/admin/notifications", label: "Notifications", Icon: Bell, perm: "dashboard:view" }] },
+  { group: "Insights", items: [{ href: "/admin/reports", label: "Reports", Icon: BarChart3, perm: "reports:view" }] },
   { group: "System", items: [
-    { href: "/users", label: "Admin Users", Icon: ShieldCheck, perm: "admins:manage" },
-    { href: "/settings", label: "Settings", Icon: Settings, perm: "settings:manage" }] },
+    { href: "/admin/users", label: "Admin Users", Icon: ShieldCheck, perm: "admins:manage" },
+    { href: "/admin/settings", label: "Settings", Icon: Settings, perm: "settings:manage" }] },
 ];
 
 export function AdminShell({ admin, permissions, children }: { admin: { fullName: string; email: string; role: string }; permissions: string[]; children: React.ReactNode }) {
   const path = usePathname(); const [open, setOpen] = useState(false);
-  const logout = async () => { await api("/api/admin/auth/logout", { body: {} }).catch(() => {}); window.location.href = "/login"; };
+  const logout = async () => { await api("/api/admin/auth/logout", { body: {} }).catch(() => {}); window.location.href = "/admin/login"; };
   const nav = (
     <nav aria-label="Admin" className="flex h-full flex-col overflow-y-auto p-4">
       <p className="mb-4 px-3 font-display text-2xl text-brand-700">PMHCOSMETICS</p>
@@ -40,7 +40,7 @@ export function AdminShell({ admin, permissions, children }: { admin: { fullName
           <div key={g.group || "top"} className="mb-3">
             {g.group && <p className="mb-1 px-3 text-xs font-medium text-muted">{g.group}</p>}
             {items.map(({ href, label, Icon }) => {
-              const active = href === "/" ? path === "/admin" || path === "/" : path.includes(href);
+              const active = href === "/admin" ? path === "/admin" : path.startsWith(href);
               return (
                 <Link key={href} href={href} onClick={() => setOpen(false)} aria-current={active ? "page" : undefined}
                   className={cn("flex min-h-[44px] items-center gap-3 rounded-2xl px-3 text-[15px] font-medium", active ? "bg-brand-500 text-white" : "hover:bg-blush")}>
@@ -77,3 +77,4 @@ export function AdminShell({ admin, permissions, children }: { admin: { fullName
     </div>
   );
 }
+
