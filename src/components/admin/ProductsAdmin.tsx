@@ -18,7 +18,7 @@ export function ProductsAdmin() {
   const act = async (fn: () => Promise<unknown>, msg: string) => { try { await fn(); toast(msg); reload(); } catch (e) { toast(e instanceof ApiError ? e.message : "Failed", "error"); } };
   return (
     <>
-      <PageHeader title="Products" action={<ButtonLink href="/products/new" size="sm">Add product</ButtonLink>} />
+      <PageHeader title="Products" action={<ButtonLink href="/admin/products/new" size="sm">Add product</ButtonLink>} />
       <Panel>
         <div className="mb-4 flex flex-wrap gap-3">
           <div className="min-w-[200px] flex-1"><Input placeholder="Search name or SKU" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} aria-label="Search products" /></div>
@@ -44,3 +44,4 @@ export function ProductsAdmin() {
     </>
   );
 }
+
