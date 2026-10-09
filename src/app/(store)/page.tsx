@@ -25,8 +25,8 @@ export default async function Home() {
     user ? getRecommendations(user.id, 4) : Promise.resolve([]),
   ]);
   const banners = content.banners.length ? content.banners : [
-    { title: "Free delivery on bigger baskets", text: "Spend over ₦50,000 and we cover the delivery.", href: "/shop" },
-    { title: "Try BEAUTY10", text: "10% off orders over ₦20,000 while it lasts.", href: "/shop" },
+    { title: "Free delivery on bigger baskets", text: "Spend over ₦50,000 and get 30% 0ff delivery fee.", href: "/shop" },
+    { title: "Try BEAUTY10", text: "5% off orders over ₦20,000 while it lasts.", href: "/shop" },
   ];
   const h = content.hero;
 
