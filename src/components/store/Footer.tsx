@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "./Navbar";
 
 const COLS = [
-  { title: "Shop", links: [["/shop", "All products"], ["/category/skincare", "Skincare"], ["/category/makeup", "Makeup"], ["/category/new-arrivals", "New arrivals"]] },
+  { title: "Shop", links: [["/shop", "All products"], ["/category/skincare", "Skincare"], ["/category/fragrance", "Fragrance"], ["/category/new-arrivals", "New arrivals"]] },
   { title: "Company", links: [["/about", "About"], ["/contact", "Contact"], ["/faq", "FAQ"]] },
   { title: "Legal", links: [["/privacy", "Privacy Policy"], ["/terms", "Terms"]] },
 ];
@@ -13,7 +13,7 @@ export function Footer({ supportEmail, supportPhone }: { supportEmail: string; s
       <div className="container-x grid gap-10 py-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div>
           <Logo />
-          <p className="mt-3 max-w-xs text-muted">Skincare, makeup and beauty essentials, carefully selected and delivered across Nigeria.</p>
+          <p className="mt-3 max-w-xs text-muted"> Skincare, fragrance and beauty essentials, carefully selected and delivered across Nigeria.</p>
           <div className="mt-4 flex gap-4 text-sm font-medium">
             {["Instagram", "TikTok", "X"].map((s) => <a key={s} href="#" className="hover:text-brand-600" rel="noopener">{s}</a>)}
           </div>
